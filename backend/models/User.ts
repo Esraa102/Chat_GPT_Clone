@@ -17,3 +17,5 @@ const userSchema = new mongoose.Schema({
   },
   chats: [chatSchema],
 });
+
+export const User = mongoose.model("Users", userSchema);
