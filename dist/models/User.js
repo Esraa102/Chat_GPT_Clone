@@ -7,7 +7,7 @@ exports.User = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const Chat_js_1 = require("./Chat.js");
 const userSchema = new mongoose_1.default.Schema({
-    userName: {
+    username: {
         type: String,
         required: true,
     },

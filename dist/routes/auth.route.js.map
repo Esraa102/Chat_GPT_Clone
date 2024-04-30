@@ -1,1 +1,1 @@
-{"version":3,"file":"auth.route.js","sourceRoot":"","sources":["../../backend/routes/auth.route.ts"],"names":[],"mappings":";;;;;;AAAA,sDAA8B;AAE9B,MAAM,MAAM,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEb,4BAAU"}
+{"version":3,"file":"auth.route.js","sourceRoot":"","sources":["../../backend/routes/auth.route.ts"],"names":[],"mappings":";;;;;;AAAA,sDAA8B;AAC9B,0EAAiE;AAEjE,MAAM,MAAM,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAGb,4BAAU;AAD7B,MAAM,CAAC,IAAI,CAAC,WAAW,EAAE,iCAAY,CAAC,CAAC"}

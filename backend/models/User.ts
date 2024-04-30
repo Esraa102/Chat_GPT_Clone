@@ -1,8 +1,17 @@
 import mongoose from "mongoose";
-import { chatSchema } from "./Chat.js";
+import { ChatDocument, chatSchema } from "./Chat.js";
 
-const userSchema = new mongoose.Schema({
-  userName: {
+interface UserDocument {
+  username: String;
+  email: String;
+  password: String;
+  chats: Array<ChatDocument>;
+  createdAt: Date;
+  updatedAt: Date;
+  _doc?: any;
+}
+const userSchema = new mongoose.Schema<UserDocument>({
+  username: {
     type: String,
     required: true,
   },
@@ -18,4 +27,4 @@ const userSchema = new mongoose.Schema({
   chats: [chatSchema],
 });
 
-export const User = mongoose.model("Users", userSchema);
+export const User = mongoose.model<UserDocument>("Users", userSchema);
