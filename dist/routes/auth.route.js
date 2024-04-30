@@ -10,4 +10,5 @@ const validators_js_1 = require("../utils/validators.js");
 const router = express_1.default.Router();
 exports.authRouter = router;
 router.post("/register", (0, validators_js_1.validate)(validators_js_1.registerValidator), auth_controller_js_1.registerUser);
+router.post("/login", (0, validators_js_1.validate)(validators_js_1.logInValidator), auth_controller_js_1.logInUser);
 //# sourceMappingURL=auth.route.js.map

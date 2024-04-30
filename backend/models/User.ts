@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { ChatDocument, chatSchema } from "./Chat.js";
 
-interface UserDocument {
+export interface UserDocument {
   username: String;
   email: String;
   password: String;
