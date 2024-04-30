@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.logInUser = exports.registerUser = void 0;
 const User_js_1 = require("../models/User.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const createToken_js_1 = require("../utils/createToken.js");
 const registerUser = async (req, res, next) => {
     const { username, email, password } = req.body;
     if (username && email && password) {
@@ -24,8 +24,8 @@ const registerUser = async (req, res, next) => {
                     email,
                     password: hasedPassword,
                 });
-                const { password: encyrptedPass, ...rest } = newUser._doc;
-                res.status(201).json({ status: "OK", userData: rest });
+                // create access token
+                (0, createToken_js_1.createToken)(newUser, res, 201);
             }
         }
         catch (error) {
@@ -51,23 +51,8 @@ const logInUser = async (req, res, next) => {
         }
         else {
             if (bcrypt_1.default.compareSync(password, isAuthorized.password.toString())) {
-                const accessToken = jsonwebtoken_1.default.sign({
-                    _id: isAuthorized._id,
-                    username: isAuthorized.username,
-                    email: isAuthorized.email,
-                    password: isAuthorized.password,
-                    chats: isAuthorized.chats,
-                }, process.env.ACCESS_TOKEN_SECRET, {
-                    expiresIn: "7d",
-                });
-                const { password: encyrptedPass, ...rest } = isAuthorized._doc;
-                return res
-                    .status(200)
-                    .cookie("access_token", accessToken, {
-                    httpOnly: true,
-                    maxAge: 86400000 * 7, // 7 days,
-                })
-                    .json({ status: "OK", userData: rest });
+                // create  access token
+                (0, createToken_js_1.createToken)(isAuthorized, res, 200);
             }
             else {
                 return res

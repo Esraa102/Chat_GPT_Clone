@@ -2,6 +2,7 @@ import { NextFunction, Response, Request } from "express";
 import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { createToken } from "../utils/createToken.js";
 
 const registerUser = async (
   req: Request,
@@ -23,8 +24,8 @@ const registerUser = async (
           email,
           password: hasedPassword,
         });
-        const { password: encyrptedPass, ...rest } = newUser._doc;
-        res.status(201).json({ status: "OK", userData: rest });
+        // create access token
+        createToken(newUser, res, 201);
       }
     } catch (error) {
       console.log(error);
@@ -47,27 +48,8 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
         .json({ status: "Error", message: "User Is Unathorized" });
     } else {
       if (bcrypt.compareSync(password, isAuthorized.password.toString())) {
-        const accessToken = jwt.sign(
-          {
-            _id: isAuthorized._id,
-            username: isAuthorized.username,
-            email: isAuthorized.email,
-            password: isAuthorized.password,
-            chats: isAuthorized.chats,
-          },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: "7d",
-          }
-        );
-        const { password: encyrptedPass, ...rest } = isAuthorized._doc;
-        return res
-          .status(200)
-          .cookie("access_token", accessToken, {
-            httpOnly: true,
-            maxAge: 86400000 * 7, // 7 days,
-          })
-          .json({ status: "OK", userData: rest });
+        // create  access token
+        createToken(isAuthorized, res, 200);
       } else {
         return res
           .status(400)
