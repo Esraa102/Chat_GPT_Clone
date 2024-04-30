@@ -15,16 +15,27 @@ const Header = () => {
             Chat GPT
           </span>
         </Link>
-        {!currentUser && (
-          <div className="flex items-center gap-4 text-lg font-semibold">
-            <Link to={"/sign-in"} className="hover:text-main transition">
-              Sign In
-            </Link>
-            <Link to={"/sign-up"} className="btn">
-              Create Account
-            </Link>
-          </div>
-        )}
+        <nav>
+          {currentUser ? (
+            <div className="flex items-center gap-6 text-lg font-semibold">
+              <Link to={"/chat"} className="hover:text-main transition">
+                Your Chat
+              </Link>
+              <button type="button" className="btn">
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4 text-lg font-semibold">
+              <Link to={"/sign-in"} className="hover:text-main transition">
+                Sign In
+              </Link>
+              <Link to={"/sign-up"} className="btn">
+                Create Account
+              </Link>
+            </div>
+          )}
+        </nav>
       </div>
     </header>
   );
