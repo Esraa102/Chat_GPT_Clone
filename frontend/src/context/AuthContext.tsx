@@ -6,7 +6,7 @@ type CurrentUser = {
   imgProfile?: string;
 };
 
-export type AuthUser = {
+type AuthUser = {
   isLoggedIn: boolean;
   user: CurrentUser | null;
   logIn: (email: string, password: string) => Promise<void>;
