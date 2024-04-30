@@ -24,15 +24,20 @@ const registerUser = async (
           email,
           password: hasedPassword,
         });
-        // clear previous token
-        res.clearCookie(COOKIE_NAME, {
-          httpOnly: true,
-          signed: true,
-          path: "/",
-        });
+
         // create access token
         if (newUser) {
-          createToken(newUser, res, 201);
+          const accessToken = createToken(newUser);
+          const { password: encyrptedPass, ...rest } = newUser._doc;
+          res
+            .status(201)
+            .cookie(COOKIE_NAME, accessToken, {
+              path: "/",
+              httpOnly: true,
+              maxAge: 86400000 * 7, // 7 days,
+            })
+            .json({ status: "OK", userData: rest });
+          console.log("accessToken", accessToken);
         }
       }
     } catch (error) {
@@ -56,14 +61,18 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
         .json({ status: "Error", message: "User Is Unathorized" });
     } else {
       if (bcrypt.compareSync(password, isAuthorized.password.toString())) {
-        // clear previous token
-        res.clearCookie(COOKIE_NAME, {
-          httpOnly: true,
-          signed: true,
-          path: "/",
-        });
         // create  access token
-        createToken(isAuthorized, res, 200);
+        const accessToken = createToken(isAuthorized);
+        const { password: encyrptedPass, ...rest } = isAuthorized._doc;
+        res
+          .status(200)
+          .cookie(COOKIE_NAME, accessToken, {
+            path: "/",
+            httpOnly: true,
+            maxAge: 86400000 * 7, // 7 days,
+          })
+          .json({ status: "OK", userData: rest });
+        console.log("accessToken", accessToken);
       } else {
         return res
           .status(400)

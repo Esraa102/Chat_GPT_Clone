@@ -25,15 +25,19 @@ const registerUser = async (req, res, next) => {
                     email,
                     password: hasedPassword,
                 });
-                // clear previous token
-                res.clearCookie(constants_js_1.COOKIE_NAME, {
-                    httpOnly: true,
-                    signed: true,
-                    path: "/",
-                });
                 // create access token
                 if (newUser) {
-                    (0, createToken_js_1.createToken)(newUser, res, 201);
+                    const accessToken = (0, createToken_js_1.createToken)(newUser);
+                    const { password: encyrptedPass, ...rest } = newUser._doc;
+                    res
+                        .status(201)
+                        .cookie(constants_js_1.COOKIE_NAME, accessToken, {
+                        path: "/",
+                        httpOnly: true,
+                        maxAge: 86400000 * 7, // 7 days,
+                    })
+                        .json({ status: "OK", userData: rest });
+                    console.log("accessToken", accessToken);
                 }
             }
         }
@@ -60,14 +64,18 @@ const logInUser = async (req, res, next) => {
         }
         else {
             if (bcrypt_1.default.compareSync(password, isAuthorized.password.toString())) {
-                // clear previous token
-                res.clearCookie(constants_js_1.COOKIE_NAME, {
-                    httpOnly: true,
-                    signed: true,
-                    path: "/",
-                });
                 // create  access token
-                (0, createToken_js_1.createToken)(isAuthorized, res, 200);
+                const accessToken = (0, createToken_js_1.createToken)(isAuthorized);
+                const { password: encyrptedPass, ...rest } = isAuthorized._doc;
+                res
+                    .status(200)
+                    .cookie(constants_js_1.COOKIE_NAME, accessToken, {
+                    path: "/",
+                    httpOnly: true,
+                    maxAge: 86400000 * 7, // 7 days,
+                })
+                    .json({ status: "OK", userData: rest });
+                console.log("accessToken", accessToken);
             }
             else {
                 return res

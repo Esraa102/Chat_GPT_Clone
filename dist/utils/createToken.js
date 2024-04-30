@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const constants_js_1 = require("./constants.js");
-const createToken = (user, res, statusCode) => {
+const createToken = (user) => {
     const accessToken = jsonwebtoken_1.default.sign({
         _id: user._id,
         username: user.username,
@@ -15,16 +14,7 @@ const createToken = (user, res, statusCode) => {
     }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "7d",
     });
-    const { password: encyrptedPass, ...rest } = user._doc;
-    return res
-        .status(Number(statusCode))
-        .cookie(constants_js_1.COOKIE_NAME, accessToken, {
-        path: "/",
-        httpOnly: true,
-        maxAge: 86400000 * 7, // 7 days,
-        signed: true,
-    })
-        .json({ status: "OK", userData: rest });
+    return accessToken;
 };
 exports.createToken = createToken;
 //# sourceMappingURL=createToken.js.map
