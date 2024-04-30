@@ -37,7 +37,6 @@ const registerUser = async (
               maxAge: 86400000 * 7, // 7 days,
             })
             .json({ status: "OK", userData: rest });
-          console.log("accessToken", accessToken);
         }
       }
     } catch (error) {
@@ -72,7 +71,6 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
             maxAge: 86400000 * 7, // 7 days,
           })
           .json({ status: "OK", userData: rest });
-        console.log("accessToken", accessToken);
       } else {
         return res
           .status(400)
