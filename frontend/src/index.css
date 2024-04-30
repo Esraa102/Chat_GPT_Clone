@@ -26,3 +26,55 @@
 .box-shadow {
   box-shadow: -5px 3px 62px -8px rgba(29, 178, 192, 0.69);
 }
+
+.loader {
+  width: 40px;
+  height: 40px;
+  color: #1db2c0;
+  background: conic-gradient(
+      from -45deg at top 20px left 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from 45deg at right 20px top 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from 135deg at bottom 20px left 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from -135deg at left 20px top 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    );
+  -webkit-animation: l4 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+  animation: l4 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@-webkit-keyframes l4 {
+  50% {
+    width: 60px;
+    height: 60px;
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes l4 {
+  50% {
+    width: 60px;
+    height: 60px;
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -7,7 +7,7 @@ const Header = () => {
   const { isLoggedIn, user, logOut } = context;
   return (
     <header className="fixed  top-0 left-0 w-full backdrop-blur-md">
-      <div className="container flex items-center gap-4 justify-between mx-auto py-4 px-4 lg:px-0">
+      <div className="container flex items-center gap-4 justify-between mx-auto py-4 lg:py-5 px-4 lg:px-0">
         <Link to={"/"} className="flex items-center gap-1">
           <img
             src="/assets/logo.png"
