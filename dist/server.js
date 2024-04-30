@@ -7,8 +7,9 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const cors_1 = __importDefault(require("cors"));
-const connectToDB_js_1 = require("./config/connectToDB.js");
 const morgan_1 = __importDefault(require("morgan"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const connectToDB_js_1 = require("./config/connectToDB.js");
 const auth_route_js_1 = require("./routes/auth.route.js");
 const chat_route_js_1 = require("./routes/chat.route.js");
 const app = (0, express_1.default)();
@@ -16,11 +17,12 @@ const port = process.env.PORT || 5001;
 (0, connectToDB_js_1.connectToDB)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, cookie_parser_1.default)(process.env.ACCESS_TOKEN_SECRET));
 app.use((0, cors_1.default)({
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
-// remove it in the production mode
+// remove it in  production mode
 app.use((0, morgan_1.default)("dev"));
 // Routes
 app.use("/api/v1/auth", auth_route_js_1.authRouter);

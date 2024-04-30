@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
-import { connectToDB } from "./config/connectToDB.js";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import { connectToDB } from "./config/connectToDB.js";
 import { authRouter } from "./routes/auth.route.js";
 import { chatRouter } from "./routes/chat.route.js";
 const app = express();
@@ -12,13 +13,14 @@ const port = process.env.PORT || 5001;
 connectToDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.ACCESS_TOKEN_SECRET));
 app.use(
   cors({
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
-// remove it in the production mode
+// remove it in  production mode
 app.use(morgan("dev"));
 
 // Routes

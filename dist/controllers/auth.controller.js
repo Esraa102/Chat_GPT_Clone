@@ -7,6 +7,7 @@ exports.logInUser = exports.registerUser = void 0;
 const User_js_1 = require("../models/User.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const createToken_js_1 = require("../utils/createToken.js");
+const constants_js_1 = require("../utils/constants.js");
 const registerUser = async (req, res, next) => {
     const { username, email, password } = req.body;
     if (username && email && password) {
@@ -24,8 +25,16 @@ const registerUser = async (req, res, next) => {
                     email,
                     password: hasedPassword,
                 });
+                // clear previous token
+                res.clearCookie(constants_js_1.COOKIE_NAME, {
+                    httpOnly: true,
+                    signed: true,
+                    path: "/",
+                });
                 // create access token
-                (0, createToken_js_1.createToken)(newUser, res, 201);
+                if (newUser) {
+                    (0, createToken_js_1.createToken)(newUser, res, 201);
+                }
             }
         }
         catch (error) {
@@ -51,6 +60,12 @@ const logInUser = async (req, res, next) => {
         }
         else {
             if (bcrypt_1.default.compareSync(password, isAuthorized.password.toString())) {
+                // clear previous token
+                res.clearCookie(constants_js_1.COOKIE_NAME, {
+                    httpOnly: true,
+                    signed: true,
+                    path: "/",
+                });
                 // create  access token
                 (0, createToken_js_1.createToken)(isAuthorized, res, 200);
             }

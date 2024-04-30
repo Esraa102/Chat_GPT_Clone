@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { Response } from "express";
 import { ChatDocument } from "../models/Chat";
 import mongoose from "mongoose";
+import { COOKIE_NAME } from "./constants.js";
 
 export const createToken = (
   user: {
@@ -29,9 +30,11 @@ export const createToken = (
   const { password: encyrptedPass, ...rest } = user._doc;
   return res
     .status(Number(statusCode))
-    .cookie("access_token", accessToken, {
+    .cookie(COOKIE_NAME, accessToken, {
+      path: "/",
       httpOnly: true,
       maxAge: 86400000 * 7, // 7 days,
+      signed: true,
     })
     .json({ status: "OK", userData: rest });
 };

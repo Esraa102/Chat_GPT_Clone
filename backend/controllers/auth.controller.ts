@@ -1,8 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { createToken } from "../utils/createToken.js";
+import { COOKIE_NAME } from "../utils/constants.js";
 
 const registerUser = async (
   req: Request,
@@ -24,8 +24,16 @@ const registerUser = async (
           email,
           password: hasedPassword,
         });
+        // clear previous token
+        res.clearCookie(COOKIE_NAME, {
+          httpOnly: true,
+          signed: true,
+          path: "/",
+        });
         // create access token
-        createToken(newUser, res, 201);
+        if (newUser) {
+          createToken(newUser, res, 201);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -48,6 +56,12 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
         .json({ status: "Error", message: "User Is Unathorized" });
     } else {
       if (bcrypt.compareSync(password, isAuthorized.password.toString())) {
+        // clear previous token
+        res.clearCookie(COOKIE_NAME, {
+          httpOnly: true,
+          signed: true,
+          path: "/",
+        });
         // create  access token
         createToken(isAuthorized, res, 200);
       } else {
