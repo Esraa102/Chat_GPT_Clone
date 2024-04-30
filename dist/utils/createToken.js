@@ -10,7 +10,6 @@ const createToken = (user, res, statusCode) => {
         _id: user._id,
         username: user.username,
         email: user.email,
-        password: user.password,
         chats: user.chats,
     }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "7d",

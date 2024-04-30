@@ -8,10 +8,7 @@ export const createToken = (
     _id: mongoose.Types.ObjectId;
     username: String;
     email: String;
-    password: String;
     chats: Array<ChatDocument>;
-    createdAt: Date;
-    updatedAt: Date;
     _doc?: any;
   },
   res: Response,
@@ -22,7 +19,6 @@ export const createToken = (
       _id: user._id,
       username: user.username,
       email: user.email,
-      password: user.password,
       chats: user.chats,
     },
     process.env.ACCESS_TOKEN_SECRET,
