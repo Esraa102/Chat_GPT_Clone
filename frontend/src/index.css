@@ -2,8 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer {
+@layer base {
   body {
     @apply bg-slate-950 text-white;
   }
+}
+
+@layer components {
+  .btn {
+    @apply bg-main px-3 py-1 text-[17px] rounded-md border-main border-2 hover:bg-transparent hover:text-main transition;
+  }
+  .form {
+    @apply w-full flex flex-col mt-8 gap-4 mx-auto md:w-[85%] px-6 py-4 rounded-md;
+  }
+  .input {
+    @apply px-3 py-2 bg-transparent text-white focus:outline-none rounded-md border border-gray-500 focus:border-2 focus:border-main;
+  }
+  .error {
+    @apply text-red-600  text-xs font-semibold px-2;
+  }
+}
+
+.box-shadow {
+  box-shadow: -5px 3px 62px -8px rgba(29, 178, 192, 0.69);
 }
