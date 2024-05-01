@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { AuthLayout, Chat, ErrorPage, Home, SignIn, SignUp } from "./pages";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
+      <Toaster />
     </main>
   );
 }

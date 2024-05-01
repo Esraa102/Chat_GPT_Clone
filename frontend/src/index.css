@@ -21,6 +21,9 @@
   .error {
     @apply text-red-600  text-xs font-semibold px-2;
   }
+  .load-btn {
+    @apply opacity-60 cursor-not-allowed hover:bg-main hover:text-white;
+  }
 }
 
 .box-shadow {

@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.ACCESS_TOKEN_SECRET));
 app.use(
   cors({
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
@@ -23,7 +24,7 @@ app.use(
 // remove it in  production mode
 app.use(morgan("dev"));
 
-// Routes
+// Routess
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/chats", chatRouter);
 

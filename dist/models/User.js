@@ -20,6 +20,9 @@ const userSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    imgProfile: {
+        type: String,
+    },
     chats: [Chat_js_1.chatSchema],
 });
 exports.User = mongoose_1.default.model("Users", userSchema);

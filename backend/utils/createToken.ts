@@ -6,6 +6,7 @@ export const createToken = (user: {
   _id: mongoose.Types.ObjectId;
   username: String;
   email: String;
+  imgProfile: String;
   chats: Array<ChatDocument>;
   _doc?: any;
 }) => {
@@ -14,6 +15,7 @@ export const createToken = (user: {
       _id: user._id,
       username: user.username,
       email: user.email,
+      imgProfile: user.imgProfile,
       chats: user.chats,
     },
     process.env.ACCESS_TOKEN_SECRET,

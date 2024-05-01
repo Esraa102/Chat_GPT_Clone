@@ -6,6 +6,7 @@ export interface UserDocument {
   email: String;
   password: String;
   chats: Array<ChatDocument>;
+  imgProfile: String;
   createdAt: Date;
   updatedAt: Date;
   _doc?: any;
@@ -23,6 +24,9 @@ const userSchema = new mongoose.Schema<UserDocument>({
   password: {
     type: String,
     required: true,
+  },
+  imgProfile: {
+    type: String,
   },
   chats: [chatSchema],
 });

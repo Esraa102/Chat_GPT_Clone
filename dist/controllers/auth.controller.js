@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logInUser = exports.registerUser = void 0;
+exports.logOut = exports.getUser = exports.logInUser = exports.registerUser = void 0;
 const User_js_1 = require("../models/User.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const createToken_js_1 = require("../utils/createToken.js");
@@ -88,4 +88,33 @@ const logInUser = async (req, res, next) => {
     }
 };
 exports.logInUser = logInUser;
+const getUser = async (req, res, next) => {
+    if (req.user) {
+        return res.status(200).json({ status: "OK", userData: req.user });
+    }
+    else {
+        return res
+            .status(500)
+            .json({ status: "Error", message: "Something went wrong:(" });
+    }
+};
+exports.getUser = getUser;
+const logOut = async (req, res, next) => {
+    if (req.user) {
+        return res
+            .clearCookie(constants_js_1.COOKIE_NAME, {
+            httpOnly: true,
+            path: "/",
+        })
+            .status(200)
+            .json({ status: "OK", message: "User Logged Out Successfully" });
+    }
+    else {
+        return res.status(401).json({
+            status: "Error",
+            message: "Your session has been expired, you need to log in first",
+        });
+    }
+};
+exports.logOut = logOut;
 //# sourceMappingURL=auth.controller.js.map

@@ -4,6 +4,9 @@ import bcrypt from "bcrypt";
 import { createToken } from "../utils/createToken.js";
 import { COOKIE_NAME } from "../utils/constants.js";
 
+interface GetUserRequest extends Request {
+  user?: Record<string, any>;
+}
 const registerUser = async (
   req: Request,
   res: Response,
@@ -83,4 +86,39 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { registerUser, logInUser };
+const getUser = async (
+  req: GetUserRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.user) {
+    return res.status(200).json({ status: "OK", userData: req.user });
+  } else {
+    return res
+      .status(500)
+      .json({ status: "Error", message: "Something went wrong:(" });
+  }
+};
+
+const logOut = async (
+  req: GetUserRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.user) {
+    return res
+      .clearCookie(COOKIE_NAME, {
+        httpOnly: true,
+        path: "/",
+      })
+      .status(200)
+      .json({ status: "OK", message: "User Logged Out Successfully" });
+  } else {
+    return res.status(401).json({
+      status: "Error",
+      message: "Your session has been expired, you need to log in first",
+    });
+  }
+};
+
+export { registerUser, logInUser, getUser, logOut };

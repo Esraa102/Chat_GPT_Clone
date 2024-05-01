@@ -19,12 +19,13 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)(process.env.ACCESS_TOKEN_SECRET));
 app.use((0, cors_1.default)({
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
 // remove it in  production mode
 app.use((0, morgan_1.default)("dev"));
-// Routes
+// Routess
 app.use("/api/v1/auth", auth_route_js_1.authRouter);
 app.use("/api/v1/chats", chat_route_js_1.chatRouter);
 app.listen(port, () => {

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { AuthUser, UseAuthContext } from "../context/AuthContext";
+
 type Inputs = {
-  username?: string;
+  username: string;
   email: string;
   password: string;
 };
@@ -11,13 +13,18 @@ const AuthForm = ({ isRegister }: { isRegister: boolean }) => {
   const emailPattern =
     /^[a-zA-Z0-9_!#$%&*=+/?^{|}~]+([.-]?[a-zA-Z0-9_!#$%&*=+/?^{|}~]+)*@\w+([.-]?\w+)*(\.\w{2,50})+$/;
   const [isVisible, setIsVisible] = useState(false);
+  const { logIn, loading, signUp } = UseAuthContext() as AuthUser;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    if (isRegister) {
+      signUp(data.email, data.password, data.username);
+    } else {
+      logIn(data.email, data.password);
+    }
   };
   return (
     <form className="form box-shadow" onSubmit={handleSubmit(onSubmit)}>
@@ -119,9 +126,14 @@ const AuthForm = ({ isRegister }: { isRegister: boolean }) => {
       </div>
       <button
         type="submit"
-        className="btn font-semibold text-lg py-[6px] mt-3 block"
+        disabled={loading}
+        className={`btn font-semibold text-lg py-[6px] mt-3 block ${
+          loading && "load-btn"
+        }`}
       >
-        Create Account
+        {isRegister && !loading && "Create Account"}
+        {!isRegister && !loading && "Sign In"}
+        {loading && "Wait a second..."}
       </button>
     </form>
   );

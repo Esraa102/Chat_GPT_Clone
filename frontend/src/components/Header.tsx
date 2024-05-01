@@ -4,7 +4,7 @@ import { UseAuthContext } from "../context/AuthContext";
 const Header = () => {
   const context = UseAuthContext();
   if (!context) return null;
-  const { isLoggedIn, user, logOut } = context;
+  const { isLoggedIn, user, logOut, loading } = context;
   return (
     <header className="fixed  top-0 left-0 w-full backdrop-blur-md">
       <div className="container flex items-center gap-4 justify-between mx-auto py-4 lg:py-5 px-4 lg:px-0">
@@ -28,7 +28,12 @@ const Header = () => {
             </Link>
             {isLoggedIn ? (
               <div className="flex items-center gap-6">
-                <button onClick={() => logOut()} type="button" className="btn">
+                <button
+                  disabled={loading}
+                  onClick={() => logOut()}
+                  type="button"
+                  className={`btn ${loading && "load-btn"}`}
+                >
                   Log Out
                 </button>
                 <img
