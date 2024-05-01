@@ -9,7 +9,7 @@ exports.chatSchema = new mongoose_1.default.Schema({
     role: {
         type: String,
         required: true,
-        enum: ["User", "Bot"],
+        enum: ["user", "system"],
     },
     content: {
         type: String,

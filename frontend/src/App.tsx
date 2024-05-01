@@ -1,8 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthLayout, Chat, ErrorPage, Home, SignIn, SignUp } from "./pages";
 import { Toaster } from "react-hot-toast";
+import { AuthUser, UseAuthContext } from "./context/AuthContext";
 
 function App() {
+  const { isLoggedIn } = UseAuthContext() as AuthUser;
   return (
     <main>
       <div>
@@ -15,7 +17,10 @@ function App() {
           </Route>
 
           {/* Private Routes */}
-          <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/chat"
+            element={isLoggedIn ? <Chat /> : <Navigate to={"/sign-in"} />}
+          />
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>

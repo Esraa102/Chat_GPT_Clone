@@ -1,5 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
+import { verifyToken } from "../utils/verifyToken.js";
+import { chatValidator, validate } from "../utils/validators.js";
+import { generateChat } from "../controllers/chat.controller.js";
 
-const rotuer = express.Router();
+const router = express.Router();
 
-export { rotuer as chatRouter };
+//Private Route
+router.post("/new", validate(chatValidator), verifyToken, generateChat);
+
+export { router as chatRouter };

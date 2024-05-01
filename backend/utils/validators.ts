@@ -27,7 +27,15 @@ export const logInValidator = [
       "Password should contain at least 8 characters and can't be greater than 20 characters"
     ),
 ];
+
 export const registerValidator = [
   body("username").notEmpty().withMessage("Username is required"),
   ...logInValidator,
+];
+
+export const chatValidator = [
+  body("content")
+    .notEmpty()
+    .isLength({ min: 2, max: 10000 })
+    .withMessage("Message Is Required"),
 ];
