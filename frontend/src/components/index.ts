@@ -1,5 +1,7 @@
 import Header from "./Header";
 import AuthForm from "./AuthForm";
 import Loader from "./Loader";
-
-export { Header, AuthForm, Loader };
+import Sidebar from "./Sidebar";
+import Chats from "./Chats";
+import SendMessage from "./SendMessage";
+export { Header, AuthForm, Loader, Sidebar, Chats, SendMessage };

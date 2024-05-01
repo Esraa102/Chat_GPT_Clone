@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (data.userData) {
           setUser(data.userData);
           setIsLoggedIn(true);
-          navigate("/");
+          navigate("/chat");
         }
       } catch (error: unknown) {
         console.log(error);

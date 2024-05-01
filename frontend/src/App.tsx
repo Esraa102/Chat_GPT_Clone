@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthLayout, Chat, ErrorPage, Home, SignIn, SignUp } from "./pages";
 import { Toaster } from "react-hot-toast";
-import { AuthUser, UseAuthContext } from "./context/AuthContext";
+import { UseAuthContext } from "./context/AuthContext";
 
 function App() {
-  const { isLoggedIn } = UseAuthContext() as AuthUser;
+  const context = UseAuthContext();
+  if (!context) return;
+  const { isLoggedIn } = context;
   return (
     <main>
       <div>

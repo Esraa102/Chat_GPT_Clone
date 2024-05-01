@@ -24,10 +24,28 @@
   .load-btn {
     @apply opacity-60 cursor-not-allowed hover:bg-main hover:text-white;
   }
+  .message-form {
+    @apply sticky lg:-translate-x-[5%] bottom-4 lg:bottom-0 lg:left-1/2 border border-main z-10  bg-slate-950/50 rounded-lg backdrop-blur-lg 
+    w-full lg:w-[90%] px-4 py-3 flex items-center gap-3;
+  }
 }
 
 .box-shadow {
   box-shadow: -5px 3px 62px -8px rgba(29, 178, 192, 0.69);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1db2c0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 178, 192, 0.69);
 }
 
 .loader {

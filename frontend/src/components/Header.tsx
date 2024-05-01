@@ -38,7 +38,7 @@ const Header = () => {
                 </button>
                 <img
                   src={user?.imgProfile || "/assets/user.png"}
-                  className="w-[50px] h-[50px] cursor-pointer"
+                  className="w-[50px] h-[50px] cursor-pointer rounded-full object-cover"
                   alt="profile"
                 />
               </div>
