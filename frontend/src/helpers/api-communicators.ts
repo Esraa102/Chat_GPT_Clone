@@ -81,4 +81,24 @@ const checkAuthStatus = async () => {
   }
 };
 
-export { logInUser, registerUser, logOutUser, checkAuthStatus };
+const sendMessage = async (content: string) => {
+  const res = await fetch(`${baseURL}/chats/new`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ messageContent: content }),
+  });
+  const data = await res.json();
+  if (data.status === "OK") {
+    console.log(data);
+    return data;
+  } else {
+    console.log(data);
+    // toast.error(data.message);
+    // throw new Error(data.message);
+  }
+};
+
+export { logInUser, registerUser, logOutUser, checkAuthStatus, sendMessage };

@@ -9,9 +9,9 @@ const Sidebar = () => {
     <div className="bg-slate-900 flex flex-row items-center lg:items-start gap-6 lg:flex-col justify-between lg:justify-start w-full lg:w-[23%] px-6 py-3 lg:py-6">
       <Link
         to={"/"}
-        className="flex lg:justify-center lg:mb-6 items-center w-full gap-1"
+        className="flex lg:justify-center lg:mb-6 items-center lg:w-full gap-1"
       >
-        <img src="/assets/logo.png" alt="logo" className="w-[45px] h-[45px]" />
+        <img src="/assets/logo.png" alt="logo" className="w-[50px]" />
         <span className="hidden md:inline text-2xl font-bold text-main">
           Chat GPT
         </span>
@@ -21,7 +21,7 @@ const Sidebar = () => {
           <img
             src={user?.imgProfile || "/assets/user.png"}
             alt="user-profile"
-            className="cursor-pointer rounded-full object-cover w-[70px] h-[70px]"
+            className="cursor-pointer rounded-full object-cover w-[40px] h-[40px] md:w-[70px] md:h-[70px]"
           />
           <div className="hidden lg:block">
             <p className="text-xl font-semibold">{user?.username}</p>

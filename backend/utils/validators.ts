@@ -34,7 +34,7 @@ export const registerValidator = [
 ];
 
 export const chatValidator = [
-  body("content")
+  body("messageContent")
     .notEmpty()
     .isLength({ min: 2, max: 10000 })
     .withMessage("Message Is Required"),

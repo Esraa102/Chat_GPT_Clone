@@ -25,8 +25,8 @@
     @apply opacity-60 cursor-not-allowed hover:bg-main hover:text-white;
   }
   .message-form {
-    @apply sticky lg:-translate-x-[5%] bottom-4 lg:bottom-0 lg:left-1/2 border border-main z-10  bg-slate-950/50 rounded-lg backdrop-blur-lg 
-    w-full lg:w-[90%] px-4 py-3 flex items-center gap-3;
+    @apply fixed lg:-translate-x-[30%] -translate-x-1/2 bottom-4  left-1/2 border border-main z-10  bg-slate-950/50 rounded-lg backdrop-blur-lg 
+    w-[95%] lg:w-[65%] px-4 py-3 flex items-center gap-3;
   }
 }
 

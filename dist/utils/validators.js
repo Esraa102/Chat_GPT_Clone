@@ -32,7 +32,7 @@ exports.registerValidator = [
     ...exports.logInValidator,
 ];
 exports.chatValidator = [
-    (0, express_validator_1.body)("content")
+    (0, express_validator_1.body)("messageContent")
         .notEmpty()
         .isLength({ min: 2, max: 10000 })
         .withMessage("Message Is Required"),
