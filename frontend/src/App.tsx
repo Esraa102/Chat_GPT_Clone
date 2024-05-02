@@ -9,7 +9,6 @@ function App() {
   if (!context) return null;
   const { isLoggedIn, loading } = context;
   if (loading) return null;
-
   return (
     <main>
       <div>
