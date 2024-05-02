@@ -2,15 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
-import morgan from "morgan";
-import passport from "passport";
-import session from "express-session";
 import cookieParser from "cookie-parser";
+import path from "path";
 import { connectToDB } from "./config/connectToDB.js";
 import { authRouter } from "./routes/auth.route.js";
 import { chatRouter } from "./routes/chat.route.js";
 const app = express();
 
+const __dirname = path.resolve();
 const port = process.env.PORT || 5001;
 connectToDB();
 app.use(express.json());
@@ -24,15 +23,10 @@ app.use(
     credentials: true,
   })
 );
-app.use(
-  session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
-// remove it in  production mode
-app.use(morgan("dev"));
-
+app.use(express.static(path.join(__dirname, "/dist/frontend")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 // Routess
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/chats", chatRouter);

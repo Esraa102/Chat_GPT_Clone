@@ -7,14 +7,13 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const cors_1 = __importDefault(require("cors"));
-const morgan_1 = __importDefault(require("morgan"));
-const passport_1 = __importDefault(require("passport"));
-const express_session_1 = __importDefault(require("express-session"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const path_1 = __importDefault(require("path"));
 const connectToDB_js_1 = require("./config/connectToDB.js");
 const auth_route_js_1 = require("./routes/auth.route.js");
 const chat_route_js_1 = require("./routes/chat.route.js");
 const app = (0, express_1.default)();
+const __dirname = path_1.default.resolve();
 const port = process.env.PORT || 5001;
 (0, connectToDB_js_1.connectToDB)();
 app.use(express_1.default.json());
@@ -25,11 +24,10 @@ app.use((0, cors_1.default)({
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
-app.use((0, express_session_1.default)({ secret: "keyboard cat", resave: false, saveUninitialized: false }));
-app.use(passport_1.default.initialize());
-app.use(passport_1.default.session());
-// remove it in  production mode
-app.use((0, morgan_1.default)("dev"));
+app.use(express_1.default.static(path_1.default.join(__dirname, "/dist/frontend")));
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "frontend", "dist", "index.html"));
+});
 // Routess
 app.use("/api/v1/auth", auth_route_js_1.authRouter);
 app.use("/api/v1/chats", chat_route_js_1.chatRouter);
