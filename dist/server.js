@@ -8,6 +8,8 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
+const passport_1 = __importDefault(require("passport"));
+const express_session_1 = __importDefault(require("express-session"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const connectToDB_js_1 = require("./config/connectToDB.js");
 const auth_route_js_1 = require("./routes/auth.route.js");
@@ -23,6 +25,9 @@ app.use((0, cors_1.default)({
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
+app.use((0, express_session_1.default)({ secret: "keyboard cat", resave: false, saveUninitialized: false }));
+app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
 // remove it in  production mode
 app.use((0, morgan_1.default)("dev"));
 // Routess

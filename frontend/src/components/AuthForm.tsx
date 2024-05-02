@@ -124,6 +124,7 @@ const AuthForm = ({ isRegister }: { isRegister: boolean }) => {
         </div>
         {errors.password && <p className="error">{errors.password.message}</p>}
       </div>
+
       <button
         type="submit"
         disabled={loading}
