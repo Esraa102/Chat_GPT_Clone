@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { getAllChats } from "../helpers/api-communicators";
 import { MdError } from "react-icons/md";
 import { Message } from "./SendMessage";
+
 const Chats = ({
   chatMessages,
   setChatMessages,

@@ -7,6 +7,9 @@ import SendMessage from "./SendMessage";
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
 import DeleteChat from "./DeleteChat";
+import Hero from "./Hero";
+import About from "./About";
+import Features from "./Features";
 export {
   Header,
   AuthForm,
@@ -17,4 +20,7 @@ export {
   UserMessage,
   BotMessage,
   DeleteChat,
+  Hero,
+  About,
+  Features,
 };

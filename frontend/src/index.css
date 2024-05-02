@@ -37,6 +37,15 @@
   box-shadow: -5px 3px 62px -8px rgba(29, 178, 192, 0.69);
 }
 
+.text-shadow {
+  text-shadow: 0px 0px 20px rgba(29, 178, 192, 0.69);
+}
+.card {
+  transition: all 0.3s;
+}
+.card:hover {
+  box-shadow: -5px 3px 30px 0px rgba(29, 178, 192, 0.69);
+}
 ::-webkit-scrollbar {
   width: 8px;
   height: 6px;
