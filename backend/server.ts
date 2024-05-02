@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.ACCESS_TOKEN_SECRET));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://chat-gpt-clone-q8ib.onrender.com",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })

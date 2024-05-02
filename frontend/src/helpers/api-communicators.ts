@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/v1";
+const baseURL = "https://chat-gpt-clone-q8ib.onrender.com/api/v1";
 
 const logInUser = async (email: string, password: string) => {
   const res = await fetch(`${baseURL}/auth/login`, {

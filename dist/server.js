@@ -20,7 +20,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)(process.env.ACCESS_TOKEN_SECRET));
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: "https://chat-gpt-clone-q8ib.onrender.com",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
