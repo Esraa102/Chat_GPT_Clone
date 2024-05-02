@@ -52,3 +52,23 @@ export const generateChat = async (
     res.status(500).json({ status: "Error", message: error.message });
   }
 };
+
+export const getAllChats = async (
+  req: ChatRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findById({ _id: req.user._id });
+    if (!user) {
+      return res.status(401).json({
+        status: "Error",
+        message: "User Is Unathorized or your session expired",
+      });
+    } else {
+      return res.status(200).json({ status: "OK", chats: user.chats });
+    }
+  } catch (error) {
+    return res.status(500).json({ status: "Error", message: error.message });
+  }
+};

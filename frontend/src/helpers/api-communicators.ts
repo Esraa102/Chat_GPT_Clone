@@ -96,9 +96,34 @@ const sendMessage = async (content: string) => {
     return data;
   } else {
     console.log(data);
-    // toast.error(data.message);
-    // throw new Error(data.message);
+    throw new Error();
   }
 };
 
-export { logInUser, registerUser, logOutUser, checkAuthStatus, sendMessage };
+const getAllChats = async () => {
+  const res = await fetch(`${baseURL}/chats/all-chats`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (data.status === "OK") {
+    console.log(data);
+    return data;
+  } else {
+    console.log(data);
+    toast.error(data.message);
+    throw new Error(data.message);
+  }
+};
+
+export {
+  logInUser,
+  registerUser,
+  logOutUser,
+  checkAuthStatus,
+  sendMessage,
+  getAllChats,
+};

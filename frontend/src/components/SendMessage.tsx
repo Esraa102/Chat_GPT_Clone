@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { sendMessage } from "../helpers/api-communicators";
 
 export interface Message {
+  id?: string;
   role: "user" | "system";
   content: string;
 }
@@ -25,7 +26,7 @@ const SendMessage = ({
       setLoading(true);
       try {
         const data = await sendMessage(messageContent);
-        if (data.chats) {
+        if (data.status === "OK") {
           console.log(data);
           setChatMessages([...data.chats]);
         }
