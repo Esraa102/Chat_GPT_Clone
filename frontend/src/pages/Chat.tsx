@@ -4,7 +4,6 @@ import { Message } from "../components/SendMessage";
 
 const Chat = () => {
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
-  console.log(chatMessages);
   return (
     <section className="flex flex-col gap-6 lg:gap-0 w-full h-screen lg:flex-row">
       <Sidebar setChatMessages={setChatMessages} />

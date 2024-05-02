@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthLayout, Chat, ErrorPage, Home, SignIn, SignUp } from "./pages";
 import { Toaster } from "react-hot-toast";
@@ -5,8 +6,10 @@ import { UseAuthContext } from "./context/AuthContext";
 
 function App() {
   const context = UseAuthContext();
-  if (!context) return;
-  const { isLoggedIn } = context;
+  if (!context) return null;
+  const { isLoggedIn, loading } = context;
+  if (loading) return null;
+
   return (
     <main>
       <div>

@@ -48,10 +48,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       try {
         const data = await checkAuthStatus();
-        if (data.userData) {
+        if (data.status === "OK") {
           setUser(data.userData);
           setIsLoggedIn(true);
-          navigate("/chat");
         }
       } catch (error: unknown) {
         console.log(error);
@@ -74,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true);
     try {
       const data = await registerUser(username, email, password, imgProfile);
-      if (data.userData) {
+      if (data.status === "OK") {
         setUser(data.userData);
         setIsLoggedIn(true);
         toast.success("User has been created successfully");
@@ -96,7 +95,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true);
     try {
       const data = await logInUser(email, password);
-      if (data.userData) {
+      if (data.status === "OK") {
         setUser(data.userData);
         setIsLoggedIn(true);
         toast.success("User Logged in successfully");
@@ -121,8 +120,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (data.status === "OK") {
         setUser(null);
         setIsLoggedIn(false);
-        toast.success(data.message);
         navigate("/sign-in");
+        toast.success(data.message);
       }
     } catch (error) {
       console.log(error);

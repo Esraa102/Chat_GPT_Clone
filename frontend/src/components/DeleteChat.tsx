@@ -15,7 +15,6 @@ const DeleteChat = ({
       const data = await deleteAllChats();
       if (data.status === "OK") {
         setChatMessages([]);
-        console.log(data);
         toast.success(data.message);
       }
     } catch (error: unknown) {

@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 const baseURL = "http://localhost:5000/api/v1";
 
 const logInUser = async (email: string, password: string) => {
@@ -13,10 +11,9 @@ const logInUser = async (email: string, password: string) => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
-    toast.error(data.message);
+    console.log(data);
     throw new Error(data.message);
   }
 };
@@ -37,10 +34,9 @@ const registerUser = async (
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
-    toast.error(data.message);
+    console.log(data);
     throw new Error(data.message);
   }
 };
@@ -55,10 +51,9 @@ const logOutUser = async () => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
-    toast.error(data.message);
+    console.log(data);
     throw new Error(data.message);
   }
 };
@@ -73,10 +68,9 @@ const checkAuthStatus = async () => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
-    toast.error(data.message);
+    console.log(data);
     throw new Error(data.message);
   }
 };
@@ -92,7 +86,6 @@ const sendMessage = async (content: string) => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
     console.log(data);
@@ -110,11 +103,9 @@ const getAllChats = async () => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
     console.log(data);
-    toast.error(data.message);
     throw new Error(data.message);
   }
 };
@@ -129,7 +120,6 @@ const deleteAllChats = async () => {
   });
   const data = await res.json();
   if (data.status === "OK") {
-    console.log(data);
     return data;
   } else {
     console.log(data);

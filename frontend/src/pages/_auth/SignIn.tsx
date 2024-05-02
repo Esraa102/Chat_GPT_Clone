@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Link, useNavigate } from "react-router-dom";
 import { AuthForm } from "../../components";
+import { UseAuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const SignIn = () => {
+  const auth = UseAuthContext();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (auth?.isLoggedIn) {
+      navigate("/chat");
+    }
+  }, [auth]);
+  if (!auth) return null;
   return (
     <div className="w-full px-6 py-8 flex items-center flex-col gap-4 justify-center">
       <Link to={"/"} className="flex items-center gap-1">

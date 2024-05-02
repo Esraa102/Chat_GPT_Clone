@@ -9,7 +9,7 @@ const Sidebar = ({
   setChatMessages: React.Dispatch<React.SetStateAction<Message[]>>;
 }) => {
   const context = UseAuthContext();
-  if (!context) return;
+  if (!context) return null;
   const { user, logOut, loading } = context;
   return (
     <div className="bg-slate-900 flex flex-row items-center lg:items-start gap-6 lg:flex-col justify-between lg:justify-start w-full lg:w-[23%] px-6 py-3 lg:py-6">

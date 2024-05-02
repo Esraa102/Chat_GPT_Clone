@@ -16,7 +16,7 @@ export const verifyToken = async (
   if (!token) {
     return res.status(401).json({
       status: "Error",
-      message: "Your Session has expired, you need to log in",
+      message: "You're Unathorized, You need to log in",
     });
   } else {
     jwt.verify(
