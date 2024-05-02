@@ -6,7 +6,7 @@ import Chats from "./Chats";
 import SendMessage from "./SendMessage";
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
-
+import DeleteChat from "./DeleteChat";
 export {
   Header,
   AuthForm,
@@ -16,4 +16,5 @@ export {
   SendMessage,
   UserMessage,
   BotMessage,
+  DeleteChat,
 };

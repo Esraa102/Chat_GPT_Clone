@@ -13,4 +13,5 @@ exports.chatRouter = router;
 //Private Route
 router.post("/new", (0, validators_js_1.validate)(validators_js_1.chatValidator), verifyToken_js_1.verifyToken, chat_controller_js_1.generateChat);
 router.get("/all-chats", verifyToken_js_1.verifyToken, chat_controller_js_1.getAllChats);
+router.delete("/delete-chats", verifyToken_js_1.verifyToken, chat_controller_js_1.deleteAllChats);
 //# sourceMappingURL=chat.route.js.map

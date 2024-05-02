@@ -59,7 +59,7 @@ export const getAllChats = async (
   next: NextFunction
 ) => {
   try {
-    const user = await User.findById({ _id: req.user._id });
+    const user = await User.findById(req.user._id);
     if (!user) {
       return res.status(401).json({
         status: "Error",
@@ -70,5 +70,30 @@ export const getAllChats = async (
     }
   } catch (error) {
     return res.status(500).json({ status: "Error", message: error.message });
+  }
+};
+
+export const deleteAllChats = async (
+  req: ChatRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(401).json({
+        status: "Error",
+        message: "User Is Unathorized or your session expired",
+      });
+    } else {
+      user.chats = [];
+      await user.save();
+      return res.status(200).json({
+        status: "OK",
+        message: "Chats have been deleted successfully",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ status: "Error", message: error.message });
   }
 };

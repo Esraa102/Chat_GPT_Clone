@@ -28,6 +28,9 @@
     @apply fixed lg:-translate-x-[30%] -translate-x-1/2 bottom-4  left-1/2 border border-main z-10  bg-slate-950/50 rounded-lg backdrop-blur-lg 
     w-[95%] lg:w-[65%] px-4 py-3 flex items-center gap-3;
   }
+  .delete-btn {
+    @apply font-semibold bg-red-600 border-red-600 hover:text-red-600 btn lg:mt-6 text-sm md:text-lg lg:py-[6px] lg:block lg:w-full;
+  }
 }
 
 .box-shadow {

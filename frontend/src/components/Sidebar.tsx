@@ -1,7 +1,13 @@
 import { UseAuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { IoMdLogOut } from "react-icons/io";
-const Sidebar = () => {
+import { DeleteChat } from ".";
+import { Message } from "./SendMessage";
+const Sidebar = ({
+  setChatMessages,
+}: {
+  setChatMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+}) => {
   const context = UseAuthContext();
   if (!context) return;
   const { user, logOut, loading } = context;
@@ -28,12 +34,7 @@ const Sidebar = () => {
             <p className="text-sm font-semibold text-gray-500">{user?.email}</p>
           </div>
         </div>
-        <button
-          type="button"
-          className="font-semibold bg-red-600 border-red-600 hover:text-red-600 btn lg:mt-6 text-sm md:text-lg lg:py-[6px] lg:block lg:w-full"
-        >
-          Delete Chat
-        </button>
+        <DeleteChat setChatMessages={setChatMessages} />
         <button
           type="button"
           disabled={loading}

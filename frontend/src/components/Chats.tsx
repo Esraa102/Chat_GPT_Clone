@@ -1,14 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { BotMessage, Loader, SendMessage, UserMessage } from ".";
-import { Message } from "./SendMessage";
 import toast from "react-hot-toast";
 import { getAllChats } from "../helpers/api-communicators";
-
-const Chats = () => {
-  const [chatMessages, setChatMessages] = useState<Message[]>([]);
+import { MdError } from "react-icons/md";
+import { Message } from "./SendMessage";
+const Chats = ({
+  chatMessages,
+  setChatMessages,
+}: {
+  chatMessages: Array<Message>;
+  setChatMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+}) => {
   const [loading, setLoading] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getChats = async () => {
       setLoading(true);
       try {
@@ -53,8 +59,9 @@ const Chats = () => {
         </div>
       )}
       {!loading && chatMessages.length === 0 && (
-        <div className="w-full text-gray-500 h-[70vh] flex items-center justify-center">
-          Oops! You Have No Chats
+        <div className="w-full gap-1 font-semibold text-gray-500 h-[70vh] flex items-center justify-center">
+          <MdError size={24} />
+          <span> Oops! You Have No Chats</span>
         </div>
       )}
       <div className="mb-28">

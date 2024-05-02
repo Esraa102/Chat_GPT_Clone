@@ -119,6 +119,23 @@ const getAllChats = async () => {
   }
 };
 
+const deleteAllChats = async () => {
+  const res = await fetch(`${baseURL}/chats/delete-chats`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (data.status === "OK") {
+    console.log(data);
+    return data;
+  } else {
+    console.log(data);
+    throw new Error(data.message);
+  }
+};
 export {
   logInUser,
   registerUser,
@@ -126,4 +143,5 @@ export {
   checkAuthStatus,
   sendMessage,
   getAllChats,
+  deleteAllChats,
 };
