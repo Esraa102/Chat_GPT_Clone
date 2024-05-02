@@ -52,14 +52,26 @@ const Chats = () => {
           <Loader miniLoad />
         </div>
       )}
+      {!loading && chatMessages.length === 0 && (
+        <div className="w-full text-gray-500 h-[70vh] flex items-center justify-center">
+          Oops! You Have No Chats
+        </div>
+      )}
       <div className="mb-28">
-        {chatMessages.map((message) => {
-          return message.role === "system" ? (
-            <BotMessage key={message.id + message.content} message={message} />
-          ) : (
-            <UserMessage key={message.id + message.content} message={message} />
-          );
-        })}
+        {!loading &&
+          chatMessages.map((message) => {
+            return message.role === "system" ? (
+              <BotMessage
+                key={message.id + message.content}
+                message={message}
+              />
+            ) : (
+              <UserMessage
+                key={message.id + message.content}
+                message={message}
+              />
+            );
+          })}
       </div>
 
       <SendMessage
