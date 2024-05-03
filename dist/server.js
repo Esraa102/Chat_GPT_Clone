@@ -13,8 +13,9 @@ const connectToDB_js_1 = require("./config/connectToDB.js");
 const auth_route_js_1 = require("./routes/auth.route.js");
 const chat_route_js_1 = require("./routes/chat.route.js");
 const app = (0, express_1.default)();
-const __dirname = path_1.default.resolve();
 const port = process.env.PORT || 5001;
+const dirname = path_1.default.resolve();
+console.log(dirname);
 (0, connectToDB_js_1.connectToDB)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -24,9 +25,9 @@ app.use((0, cors_1.default)({
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
-app.use(express_1.default.static(path_1.default.join(__dirname, "/dist/frontend")));
+app.use(express_1.default.static(path_1.default.join(dirname, "/dist/frontend")));
 app.get("*", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path_1.default.join(dirname, "frontend", "dist", "index.html"));
 });
 // Routess
 app.use("/api/v1/auth", auth_route_js_1.authRouter);

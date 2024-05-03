@@ -9,8 +9,9 @@ import { authRouter } from "./routes/auth.route.js";
 import { chatRouter } from "./routes/chat.route.js";
 const app = express();
 
-const __dirname = path.resolve();
 const port = process.env.PORT || 5001;
+const dirname = path.resolve();
+console.log(dirname);
 connectToDB();
 app.use(express.json());
 
@@ -23,9 +24,9 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.static(path.join(__dirname, "/dist/frontend")));
+app.use(express.static(path.join(dirname, "/dist/frontend")));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(path.join(dirname, "frontend", "dist", "index.html"));
 });
 // Routess
 app.use("/api/v1/auth", authRouter);
