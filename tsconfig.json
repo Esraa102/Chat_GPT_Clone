@@ -9,11 +9,11 @@
     "types": [
       "node",
       "mongoose",
-      "bcrypt",
-      "cookie-parser",
-      "cors",
-      "jsonwebtoken",
-      "morgan"
+      "@types/bcrypt",
+      "@types/cookie-parser",
+      "@types/cors",
+      "@types/jsonwebtoken",
+      "@types/morgan"
     ]
   },
   "include": ["backend"]
