@@ -8,5 +8,5 @@
     "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["backend", "frontend"]
+  "include": ["backend", "backend/index.ts", "backend/**/*.ts"]
 }
