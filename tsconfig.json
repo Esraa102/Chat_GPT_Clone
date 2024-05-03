@@ -6,15 +6,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["node_modules/@types"],
-    "types": [
-      "node",
-      "bcrypt",
-      "cookie-parser",
-      "cors",
-      "jsonwebtoken",
-      "morgan"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["backend", "frontend"]
 }
